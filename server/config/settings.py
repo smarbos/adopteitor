@@ -29,6 +29,13 @@ ALLOWED_HOSTS = []
 
 MEDIA_ROOT = '/home/damian/devel/adopteitor/server/uploads/'
 MEDIA_URL   = '/uploads/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/home/damian/devel/adopteitor/server/',
+]
+
 # Application definition
 
 INSTALLED_APPS = (
