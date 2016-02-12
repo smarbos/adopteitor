@@ -1,25 +1,25 @@
 'use strict';
 
-adopteitorApp.factory('enAdopcion', ['$resource', function($resource){
-    return $resource('http://localhost:8000/enAdopcion/', null, {'query':{method: 'GET', isArray: true}});
+adopteitorApp.factory('enAdopcion', ['$resource', 'ENV', function($resource, ENV){
+    return $resource(ENV.apiEndpoint+'/Animal/', null, {'query':{method: 'GET', isArray: true}});
 }]);
 
-adopteitorApp.factory('enAdopcionPorID', ['$resource', function($resource){
+adopteitorApp.factory('enAdopcionPorID', ['$resource', 'ENV', function($resource, ENV){
     return $resource(
-        'http://localhost:8000/enAdopcion/:id/',
+        ENV.apiEndpoint+'/Animal/:id/',
         {id:'@id'},
         {'query':{method: 'GET', isArray: false}}
     );
 }]);
 
-adopteitorApp.controller('GalgosEnAdopcion', ['$scope', '$location', 'enAdopcion', '$uibModal',
-    function ($scope, $location, enAdopcion, $uibModal) {
+adopteitorApp.controller('GalgosEnAdopcion', ['$scope', '$location', 'enAdopcion', '$uibModal', 'ENV',
+    function ($scope, $location, enAdopcion, $uibModal, ENV) {
 
               $scope.galgosEnAdopcion = enAdopcion.query();
               $scope.galgosEnAdopcion.$promise.then(function(data) {
                   $scope.galgosEnAdopcionRes = data.results;
               });
-
+              $scope.apiEndpoint = ENV.apiEndpoint;
               $scope.saberMas = function(id){
                   $scope.id = id;
                   var modalInstance = $uibModal.open({

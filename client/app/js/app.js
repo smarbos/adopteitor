@@ -1,6 +1,6 @@
 'use strict';
 
-var adopteitorApp = angular.module('adopteitorApp', ['ui.router', 'ngResource', 'ui.bootstrap']);
+var adopteitorApp = angular.module('adopteitorApp', ['ui.router', 'ngResource', 'ui.bootstrap', 'config']);
 
 
 adopteitorApp.config(function($stateProvider, $urlRouterProvider) {
@@ -8,7 +8,6 @@ adopteitorApp.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
-
 
         .state('home', {
             url: '/home',
