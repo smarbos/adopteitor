@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
-from enAdopcion.models import enAdopcion
-from enAdopcion.models import enAdopcionFotos
+from adopteitor_core.models import Animal
+from adopteitor_core.models import AnimalFoto
 from rest_framework import serializers
 
 
@@ -15,14 +15,14 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-class EnAdopcionSerializer(serializers.HyperlinkedModelSerializer):
-    the_owner_of_this_photo = serializers.StringRelatedField(many=True)
+class AnimalSerializer(serializers.HyperlinkedModelSerializer):
+    fotos = serializers.StringRelatedField(many=True)
     class Meta:
-        model = enAdopcion
-        fields = ('id','nombre', 'genero', 'edad', 'desc','the_owner_of_this_photo')
+        model = Animal
+        fields = ('id','nombre', 'genero', 'fecha_nacimiento', 'desc', 'fotos', "fecha_ingreso")
 
-class enAdopcionFotoSerializer(serializers.ModelSerializer):
-    the_owner_of_this_photo = serializers.StringRelatedField(many=True)
+class AnimalFotoSerializer(serializers.ModelSerializer):
+    fotos = serializers.StringRelatedField(many=True)
     class Meta:
-        model = enAdopcion
-        fields = ('id','the_owner_of_this_photo')
+        model = Animal
+        fields = ('id','fotos')
