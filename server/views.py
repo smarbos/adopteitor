@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group
-from enAdopcion.models import enAdopcion
-from enAdopcion.models import enAdopcionFotos
+from adopteitor_core.models import Animal
+from adopteitor_core.models import AnimalFoto
 from rest_framework import viewsets, generics
-from serializers import UserSerializer, GroupSerializer, EnAdopcionSerializer, enAdopcionFotoSerializer
+from serializers import UserSerializer, GroupSerializer, AnimalSerializer, AnimalFotoSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,16 +20,16 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-class enAdopcionViewSet(viewsets.ModelViewSet):
+class AnimalViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = enAdopcion.objects.all()
-    serializer_class = EnAdopcionSerializer
+    queryset = Animal.objects.all()
+    serializer_class = AnimalSerializer
     def get_queryset(self):
-        queryset = enAdopcion.objects.all()
+        queryset = Animal.objects.all()
         galgo_id = self.request.query_params.get('galgo_id', None)
         if galgo_id is not None:
-            queryset = enAdopcion.objects.filter(id=galgo_id)
+            queryset = Animal.objects.filter(id=galgo_id)
 
         return queryset
