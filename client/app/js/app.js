@@ -3,7 +3,7 @@
 var adopteitorApp = angular.module('adopteitorApp', ['ui.router', 'ngResource', 'ui.bootstrap', 'config']);
 
 
-adopteitorApp.config(function($stateProvider, $urlRouterProvider) {
+adopteitorApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -39,5 +39,8 @@ adopteitorApp.config(function($stateProvider, $urlRouterProvider) {
         });
 
         $urlRouterProvider.otherwise('/home');
+
+        // use the HTML5 History API
+        $locationProvider.html5Mode(true);
 
 });
