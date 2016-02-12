@@ -38,6 +38,7 @@ Install NPM:
 Start NPM
 
     npm start
+
 ##Installing MysqlDB
 
 I use:
@@ -62,3 +63,10 @@ Run server:
 
 Run gulp:
     cd client && gulp && gulp watch
+
+
+### Create fixtures
+  python manage.py dumpdata adopteitor_core.Animal adopteitor_core.AnimalFoto --output fixtures.json --indent 2
+
+### Load fixtures
+   python manage.py loaddata fixtures.json
