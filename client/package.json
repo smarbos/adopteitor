@@ -6,6 +6,8 @@
   "repository": "https://github.com/FacundoMainere/adopteitor",
   "license": "MIT",
   "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-ruby-sass": "^2.0.6",
     "less": "~1.5.1",
     "node-sass": "^3.4.2"
   },
