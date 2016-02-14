@@ -10,20 +10,20 @@
   </div>
 </div>
 <hr class="separador" />
-<div class="container-fluid" ng-controller="GalgosEnAdopcion">
-    <div class="row text-center" id="listapepos">
+<div class="container-fluid" ng-controller="GalgosEnAdopcion" id="listaAnimales">
+    <div class="row text-center">
         <h1>Galgos en adopcion</h1>
     </div>
-    <div class="text-center" id="listapepos">
+    <div class="text-center">
         <div class="col-sm-3" ng-repeat="galgo in galgosEnAdopcion | limitTo : 8 ">
           <div class="tarjetaEnAdopcion">
             <div id="edad" ng-class="{'m': 'macho', 'h': 'hembra'}[galgo.genero]">
                 <p></p>
             </div>
-            <img class="img-circle" src="{{ apiEndpoint }}/static{{ galgo.fotos[0] }}" alt="Generic placeholder image" width="140" height="140">
+            <span class="img-circle fotoAnimal" style="background: url({{ apiEndpoint }}/static{{ galgo.fotos[0] }})"></span>
             <h2 ng-class="{'m': 'macho', 'h': 'hembra'}[galgo.genero]">{{galgo.nombre | limitTo : 9}}{{galgo.nombre.length > 9 ? '...' : ''}}</h2>
             <p class="desc">{{galgo.desc | limitTo : 30 }}{{galgo.desc.length > 30 ? '...' : ''}}</p>
-            <span><a class="btn btn-primary" href="#" role="button" ng-click="saberMas(galgo.id)">Saber mas!</a></span>
+            <span><a class="btn btn-primary" ui-sref="perfilAnimal({ id: galgo.id })" role="button">Saber mas!</a></span>
           </div>
         </div>
     </div>

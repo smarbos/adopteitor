@@ -4,7 +4,7 @@ adopteitorApp.factory('enAdopcion', ['$resource', 'ENV', function($resource, ENV
     return $resource(ENV.apiEndpoint+'/Animal/', null, {'query':{method: 'GET', isArray: true}});
 }]);
 
-adopteitorApp.factory('enAdopcionPorID', ['$resource', 'ENV', function($resource, ENV){
+adopteitorApp.factory('getAnimalByID', ['$resource', 'ENV', function($resource, ENV){
     return $resource(
         ENV.apiEndpoint+'/Animal/:id/',
         {id:'@id'},
@@ -20,27 +20,19 @@ adopteitorApp.controller('GalgosEnAdopcion', ['$scope', '$location', 'enAdopcion
                   $scope.galgosEnAdopcionRes = data.results;
               });
               $scope.apiEndpoint = ENV.apiEndpoint;
-              $scope.saberMas = function(id){
-                  $scope.id = id;
-                  var modalInstance = $uibModal.open({
-                      templateUrl: 'views/saber_mas.html',
-                      controller: 'enAdopcionPorID',
-                      scope: $scope
-                  });
-              }
     }
 ]);
 
-adopteitorApp.controller('enAdopcionPorID', ['$scope', '$location', 'enAdopcionPorID', '$uibModal',
-    function ($scope, $location, enAdopcionPorID, $uibModal) {
+adopteitorApp.controller('animalByID', ['$scope', '$location', 'getAnimalByID', '$uibModal', '$stateParams', 'ENV',
+    function ($scope, $location, getAnimalByID, $uibModal, $stateParams, ENV) {
+        $scope.apiEndpoint = ENV.apiEndpoint;
+        $scope.animalByID = getAnimalByID.query({},{'id': $stateParams.id});
 
-              $scope.enAdopcionPorID = enAdopcionPorID.query({},{'id': $scope.id});
-
-              $scope.enAdopcionPorID.$promise.then(function(data) {
-                     $scope.enAdopcion = data;
-                }, function(error) {
-                    console.log('error', error);
-                }
-          );
+        $scope.animalByID.$promise.then(function(data) {
+            $scope.animal = data;
+        }, function(error) {
+            console.log('error', error);
+        }
+        );
     }
 ]);

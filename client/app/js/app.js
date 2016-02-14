@@ -3,9 +3,7 @@
 var adopteitorApp = angular.module('adopteitorApp', ['ui.router', 'ngResource', 'ui.bootstrap', 'config']);
 
 
-adopteitorApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-
-    $urlRouterProvider.otherwise('/home');
+adopteitorApp.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
 
@@ -36,11 +34,13 @@ adopteitorApp.config(function($stateProvider, $urlRouterProvider, $locationProvi
         .state('donaciones', {
             url: '/donaciones',
             templateUrl: 'views/donaciones.html'
+        })
+        .state('perfilAnimal', {
+            url: '/perfilAnimal/:id',
+            controller: 'animalByID',
+            templateUrl: 'views/perfilAnimal.html'
         });
 
         $urlRouterProvider.otherwise('/home');
-
-        // use the HTML5 History API
-        $locationProvider.html5Mode(true);
 
 });
