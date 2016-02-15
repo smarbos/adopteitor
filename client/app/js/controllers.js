@@ -34,5 +34,19 @@ adopteitorApp.controller('animalByID', ['$scope', '$location', 'getAnimalByID', 
             console.log('error', error);
         }
         );
+
+        $scope.mostrarFormularioAdopcion = function(){
+          var modalInstance = $uibModal.open({
+           animation: $scope.animationsEnabled,
+           templateUrl: 'views/formularioAdopcion.html',
+          //  controller: 'formularioAdopcion',
+           resolve: {
+             items: function () {
+               return $scope.items;
+             }
+           }
+         });
+        }
+
     }
 ]);
